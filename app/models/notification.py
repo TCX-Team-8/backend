@@ -35,7 +35,7 @@ class Rappel(SQLModel, table=True):
 class AvertissementAbsence(SQLModel, table=True):
     __tablename__ = "avertissements_absence"  # Specify table name
     notification_id: Optional[int] = Field(default=None, foreign_key="notifications.id", primary_key=True)
-    absence_id: Optional[int] = Field(default=None, foreign_key="absences.pointage_id")
+    absence_id: Optional[int] = Field(default=None, foreign_key="absences.id")
 
 
 # AvertissementRetard model
