@@ -44,7 +44,7 @@ class PointageService:
     def handle_retard_and_absence(session: Session, pointage: Pointage):
         """
         Handle Retard and Absence logic:
-        - Create a Retard if heure_sortie is before 16:30 or heure_entree is after 08:30.
+        - Create a Retard if heure_sortie is before 16:30 
         - Create Absence records for employees who have no pointage for the given date.
         """
         expected_entree = time(8, 30)
