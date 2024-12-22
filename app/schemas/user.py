@@ -46,3 +46,27 @@ class Admin(BaseModel):
 
 class Employe(BaseModel):
     id_utilisateur: int
+class UserCreate(BaseModel):
+    nom: str
+    prenom: str
+    email: str
+    tel: str
+    tel_urgence: str
+    lien_urgence: str
+    nss: str
+    adresse: str
+    date_naissance: date  
+    departement_id: Optional[int]
+    photo: str
+    mot_de_passe: str
+    matricule: str
+
+class LoginRequest(BaseModel):
+    email: str
+    mot_de_passe: str
+
+class UserResponse(BaseModel):
+    id: int
+    nom: str
+    prenom: str
+    email: str
