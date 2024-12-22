@@ -1,19 +1,24 @@
+# Route to create a new user
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 from ..services.user import UtilisateurService
-from ..models.user import Utilisateur
+from ..models.user import Utilisateur, RH, Admin, Employe
 from ..schemas.user import UtilisateurCreate
 from ..database import get_session
 
-
 user_router = APIRouter()
+
+
 
 # Route to create a new user
 @user_router.post("/", response_model=Utilisateur)
 def create_utilisateur(user: UtilisateurCreate, session: Session = Depends(get_session)):
     new_user = Utilisateur(**user.model_dump())
-    created_user = UtilisateurService.create_utilisateur(session, new_user)
+    created_user = UtilisateurService.create_utilisateur(session, new_user, user.departement_id)
+
     return created_user
+
+
 
 # Route to get all users
 @user_router.get("/")

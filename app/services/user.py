@@ -1,15 +1,26 @@
-from sqlmodel import Session, select
-from ..models.user import Utilisateur
+from sqlalchemy import select
+from sqlmodel import Session
+from ..models.user import Utilisateur, RH, Admin, Employe
 
 class UtilisateurService:
     @staticmethod
-    def create_utilisateur(session: Session, utilisateur: Utilisateur) -> Utilisateur:
+    def create_utilisateur(session: Session, utilisateur: Utilisateur, departement_id: int) -> Utilisateur:
         """
-        Create a new utilisateur and add it to the database.
+        Create a new utilisateur, assign the role based on departement_id, and add it to the database.
         """
         session.add(utilisateur)
+        session.commit()  
+        session.refresh(utilisateur)  
+
+        if departement_id == 0: # RH
+            role = RH(id_utilisateur=utilisateur.id)
+        elif departement_id == 1:  # Admin
+            role = Admin(id_utilisateur=utilisateur.id)
+        else:  # Employe
+            role = Employe(id_utilisateur=utilisateur.id)
+       
+        session.add(role)
         session.commit()
-        session.refresh(utilisateur)  # Refresh to get the ID and other defaults
         return utilisateur
 
     @staticmethod
