@@ -39,13 +39,13 @@ class Employe(SQLModel, table=True):
 
 
 
-# Database URL (replace with your actual database URL)
-DATABASE_URL = "sqlite:///database.db"  # Example using SQLite; adjust for other DBs
 
-# Create an engine that connects to the database
+DATABASE_URL = "sqlite:///database.db"  
+
+
 engine = create_engine(DATABASE_URL)
 
-# Create all the tables defined by the models
+
 SQLModel.metadata.create_all(engine)
 
 print("Database and tables created successfully.")

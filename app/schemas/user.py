@@ -17,7 +17,24 @@ class Utilisateur(SQLModel):
     photo: str
     mot_de_passe: str
     matricule: str
+class UtilisateurCreate(BaseModel):
+    nom: str
+    prenom: str
+    email: str
+    tel: str
+    tel_urgence: str
+    lien_urgence: str
+    nss: str
+    adresse: str
+    date_naissance: date
+    departement_id: int
+    photo: str
+    mot_de_passe: str
+    matricule: str
 
+    class Config:
+        orm_mode = True  # This allows conversion from SQLModel to Pydantic model
+        
 class Departement(SQLModel):
     intitule: str
 
